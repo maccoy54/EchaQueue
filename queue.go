@@ -175,18 +175,9 @@ type MyQueue struct {
 	Cle []string `json:"keys"` //Recupere toutes les valeurs du json keys
 }
 
-/*
-func (q *MyQueue) initQueue(target interface{}) error {
-	r, err := http.Get("http://rundeck.chu-nancy.fr:8098/buckets/cap_zip_bucket/keys?keys=true")
-	if err != nil {
-		return err
-	}
-	defer r.Body.Close()
-	return json.NewDecoder(r.Body).Decode(q)
-}
-*/
-func (q *MyQueue) loadRiak() error {
-	r, err := http.Get("http://rundeck.chu-nancy.fr:8098/buckets/cap_zip_bucket/keys?keys=true")
+
+func (q *MyQueue) loadRiak(url string) error {
+	r, err := http.Get(url)
 	if err != nil {
 		fmt.Println(err)
 		return err
@@ -211,9 +202,9 @@ func (q *MyQueue) getKey() string {
 	return x
 }
 
-func CreateQueue(debut string, fin string) []string {
+func CreateQueue(url string, debut string, fin string) []string {
          riakkey = new(MyQueue)
-         riakkey.loadRiak()
+         riakkey.loadRiak(url)
          riakkey.Tranche(debut, fin)
          sort.Sort(SortedKeys(riakkey.Cle))
          return riakkey.Cle
