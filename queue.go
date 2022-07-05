@@ -231,4 +231,4 @@ func main() {
 		fmt.Println(riakkey.getKey())
 		depile = len(riakkey.Cle)
 	}
-}
+} 
