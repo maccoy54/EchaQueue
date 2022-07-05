@@ -230,5 +230,5 @@ func main() {
 	for depile > 0 {
 		fmt.Println(riakkey.getKey())
 		depile = len(riakkey.Cle)
-	}. 
+	}
 }
