@@ -1,4 +1,4 @@
-package EchaQueue
+package queue
 
 import (
 	"encoding/json"
