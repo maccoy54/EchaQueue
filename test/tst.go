@@ -4,7 +4,7 @@ package main
 import (
        "fmt"
        "os"
-       cap "github.com/echa_cap/queue" 
+       cap "github.com/maccoy54/EchaQueue" 
        )
 
 
