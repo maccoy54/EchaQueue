@@ -216,7 +216,7 @@ func GetKey() (string,int){
 
 
 func main() {
-
+	/*
 	riakkey = new(MyQueue)
 	riakkey.loadRiak()
 
@@ -230,5 +230,5 @@ func main() {
 	for depile > 0 {
 		fmt.Println(riakkey.getKey())
 		depile = len(riakkey.Cle)
-	}
+	}*/
 } 
