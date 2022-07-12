@@ -202,10 +202,21 @@ func (q *MyQueue) getKey() string {
 	return x
 }
 
+func (q *MyQueue) setSlice( tab[] string){
+        q.Cle = tab
+}
+
 func CreateQueue(url string, debut string, fin string) []string {
          riakkey = new(MyQueue)
          riakkey.loadRiak(url)
          riakkey.Tranche(debut, fin)
+         sort.Sort(SortedKeys(riakkey.Cle))
+         return riakkey.Cle
+}
+
+func SetQueue(t[] string) []string {
+         riakkey = new(MyQueue)
+         riakkey.setSlice(t)
          sort.Sort(SortedKeys(riakkey.Cle))
          return riakkey.Cle
 }
