@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"sync"
 )
 
 type SortedKeys []string
@@ -172,6 +173,7 @@ func (s *MyQueue) Tranche(date1 string, date2 string) {
 }
 
 type MyQueue struct {
+	mu sync.Mutex
 	Cle []string `json:"keys"` //Recupere toutes les valeurs du json keys
 }
 
@@ -196,6 +198,8 @@ func (q *MyQueue) byDataArrivee() {
 
 // On retourne le premier element de la queue et on le supprime
 func (q *MyQueue) getKey() string {
+	q.mu.Lock()
+		defer q.mu.Unlock()
 	x := q.Cle[0]
 	// on decale queue vers le haut
 	q.Cle = q.Cle[1:]
