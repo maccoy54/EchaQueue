@@ -1,3 +1,4 @@
+go get -u
 package queue
 
 import (
@@ -200,8 +201,9 @@ func (q *MyQueue) byDataArrivee() {
 func (q *MyQueue) getKey() string {
 	q.mu.Lock()
 		defer q.mu.Unlock()
+	string x
 	if len(q.Cle) >= 1 && q.Cle != nil {
-	   x := q.Cle[0]
+	   x = q.Cle[0]
 	   if len(q.Cle) > 1 {
 	      // on decale queue vers le haut
 	      q.Cle = q.Cle[1:]
