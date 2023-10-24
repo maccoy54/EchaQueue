@@ -200,14 +200,16 @@ func (q *MyQueue) byDataArrivee() {
 func (q *MyQueue) getKey() string {
 	q.mu.Lock()
 		defer q.mu.Unlock()
-	if len(q.Cle) >= 1 {
+	if len(q.Cle) >= 1 && q.Cle != nil {
 	   x := q.Cle[0]
 	   if len(q.Cle) > 1 {
 	      // on decale queue vers le haut
 	      q.Cle = q.Cle[1:]
            } else {
 	     q.Cle = nil
+	     x = nill
 	   }
+	}
 	return x
 }
 
