@@ -207,7 +207,7 @@ func (q *MyQueue) getKey() string {
 	      q.Cle = q.Cle[1:]
            } else {
 	     q.Cle = nil
-	     x = nill
+	     x = nil
 	   }
 	}
 	return x
