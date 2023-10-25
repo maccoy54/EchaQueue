@@ -201,7 +201,7 @@ func (q *MyQueue) byDataArrivee() {
 func (q *MyQueue) getKey() string {
 	q.mu.Lock()
 		defer q.mu.Unlock()
-	string x
+	var string x
 	if len(q.Cle) >= 1 && q.Cle != nil {
 	   x = q.Cle[0]
 	   if len(q.Cle) > 1 {
@@ -209,7 +209,7 @@ func (q *MyQueue) getKey() string {
 	      q.Cle = q.Cle[1:]
            } else {
 	     q.Cle = nil
-	     x = nil
+	     x = "vide"
 	   }
 	}
 	return x
