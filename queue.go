@@ -1,4 +1,3 @@
-go get -u
 package queue
 
 import (
@@ -192,6 +191,20 @@ func (q *MyQueue) loadRiak(url string) error {
 	return json.NewDecoder(r.Body).Decode(q)
 }
 
+func (q *MyQueue) loadBnasPath(root string) error {
+        var a []string
+	filepath.WalkDir(root, func(s string, d fs.DirEntry, e error) error {
+		if e != nil {
+			return e
+		}
+		if filepath.Ext(d.Name()) == "zip" {
+			a = append(a, s)
+		}
+		return nil
+	})
+	return q.cle =a
+}
+
 // Méthode de tri du slice
 func (q *MyQueue) byDataArrivee() {
 	sort.Sort(SortedKeys(q.Cle))
@@ -223,6 +236,13 @@ func CreateQueue(url string, debut string, fin string) []string {
          riakkey = new(MyQueue)
          riakkey.loadRiak(url)
          riakkey.Tranche(debut, fin)
+         sort.Sort(SortedKeys(riakkey.Cle))
+         return riakkey.Cle
+}
+ 
+func CreateBnasQueue(pathbnas string) []string {
+         riakkey = new(MyQueue)
+         riakkey.loadBnasPath(pathbnas)
          sort.Sort(SortedKeys(riakkey.Cle))
          return riakkey.Cle
 }
