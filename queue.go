@@ -9,6 +9,8 @@ import (
 	"strings"
 	"time"
 	"sync"
+    "io/fs"
+    "path/filepath"
 )
 
 type SortedKeys []string
@@ -192,17 +194,20 @@ func (q *MyQueue) loadRiak(url string) error {
 }
 
 func (q *MyQueue) loadBnasPath(root string) error {
-        var a []string
+        //var a [] string = make ([]string,100)
 	filepath.WalkDir(root, func(s string, d fs.DirEntry, e error) error {
 		if e != nil {
 			return e
 		}
-		if filepath.Ext(d.Name()) == "zip" {
-			a = append(a, s)
+		if filepath.Ext(d.Name()) == ".zip" {
+			//a = append(a, s)
+                        q.Cle = append(q.Cle,s)
 		}
 		return nil
 	})
-	return q.cle =a
+        
+        //fmt.Println(a)
+	return nil
 }
 
 // Méthode de tri du slice
@@ -214,7 +219,7 @@ func (q *MyQueue) byDataArrivee() {
 func (q *MyQueue) getKey() string {
 	q.mu.Lock()
 		defer q.mu.Unlock()
-	var string x
+	var x string
 	if len(q.Cle) >= 1 && q.Cle != nil {
 	   x = q.Cle[0]
 	   if len(q.Cle) > 1 {
